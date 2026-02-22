@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Heart, ArrowRight, Youtube, Linkedin, Instagram } from 'lucide-react';
+import { Mail, Heart, ArrowRight, Youtube, Linkedin, Instagram, MessageCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 const logo = "/Info techiezz logo.png";
 
@@ -29,6 +29,7 @@ const socialLinks = [
   { name: 'YouTube', href: 'https://www.youtube.com/@infotechiezz', icon: Youtube },
   { name: 'LinkedIn', href: 'http://www.linkedin.com/in/Infotechiezz', icon: Linkedin },
   { name: 'Instagram', href: 'https://www.instagram.com/infotechiezz/', icon: Instagram },
+  { name: 'WhatsApp', href: 'https://whatsapp.com/channel/0029Vb7QJZG8fewpER7N8U0V', icon: MessageCircle },
 ];
 
 const Footer = () => {

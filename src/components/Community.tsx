@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Star, Quote, Heart } from 'lucide-react';
+import { Star, Quote, Heart, MessageCircle, ArrowRight } from 'lucide-react';
 
 const testimonials = [
     {
@@ -89,10 +89,24 @@ const Community = () => {
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
                         What Our <span className="gradient-text">Community</span> Says
                     </h2>
-                    <p className="text-gray-500 max-w-2xl mx-auto text-sm md:text-base">
+                    <p className="text-gray-500 max-w-2xl mx-auto text-sm md:text-base mb-8">
                         Real stories from students who transformed their careers with InfoTechiezz.
                         Join 1,000+ learners building the future.
                     </p>
+
+                    <motion.a
+                        href="https://whatsapp.com/channel/0029Vb7QJZG8fewpER7N8U0V"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white shadow-lg transition-all"
+                        style={{ background: '#25D366', boxShadow: '0 8px 16px -4px rgba(37, 211, 102, 0.4)' }}
+                    >
+                        <MessageCircle className="w-4 h-4" />
+                        Join WhatsApp Channel
+                        <ArrowRight className="w-4 h-4" />
+                    </motion.a>
                 </motion.div>
             </div>
 

@@ -242,14 +242,22 @@ const Hero = () => {
                         </motion.div>
 
                         {/* Headline */}
-                        <h1 className="section-heading mb-5">
-                            Upgrade Your Skills with{' '}
-                            <span className="gradient-text">Industry-Level</span>{' '}
+                        <h1 className="section-heading mb-6 tracking-tight">
+                            Elevate Your Career with{' '}
+                            <span className="relative inline-block">
+                                <span className="gradient-text relative z-10">Industry-Level</span>
+                                <motion.span
+                                    initial={{ width: 0 }}
+                                    animate={{ width: '100%' }}
+                                    transition={{ duration: 1, delay: 0.8 }}
+                                    className="absolute bottom-1.5 left-0 h-3 bg-blue-500/10 -z-0 rounded-full"
+                                />
+                            </span>{' '}
                             Courses
                         </h1>
 
-                        <p className="text-gray-500 text-base md:text-lg mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                            Learn <strong className="text-gray-700">Java, C, C++, Python</strong> and modern web development from expert instructors. Join live coding contests, webinars, and build real projects.
+                        <p className="text-gray-500 text-base md:text-lg mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                            Master <span className="text-blue-600 font-bold">Java, C++, Python</span> and modern web development. Join 1,000+ learners building the future through live contests and expert-led sessions.
                         </p>
 
                         {/* Feature pills row */}
@@ -257,15 +265,21 @@ const Hero = () => {
                             initial={{ opacity: 0, y: 16 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="flex flex-wrap gap-3 justify-center lg:justify-start mb-8"
+                            className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10"
                         >
-                            {featurePills.map((pill) => (
-                                <div key={pill.label} className="feature-pill">
-                                    <div className="pill-icon" style={{ background: pill.bg }}>
+                            {featurePills.map((pill, i) => (
+                                <motion.div
+                                    key={pill.label}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.3 + i * 0.1 }}
+                                    className="feature-pill"
+                                >
+                                    <div className="pill-icon shadow-sm" style={{ background: pill.bg }}>
                                         <pill.icon className="w-4 h-4" style={{ color: pill.color }} />
                                     </div>
-                                    {pill.label}
-                                </div>
+                                    <span className="tracking-tight">{pill.label}</span>
+                                </motion.div>
                             ))}
                         </motion.div>
 
@@ -273,26 +287,27 @@ const Hero = () => {
                         <motion.div
                             initial={{ opacity: 0, y: 16 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10"
+                            transition={{ delay: 0.35 }}
+                            className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start mb-12"
                         >
                             <motion.button
                                 onClick={() => scrollTo('#courses')}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="btn-primary text-sm px-7 py-3.5"
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="btn-primary text-base px-8 py-4 group"
                             >
-                                Discover Courses
-                                <ArrowRight className="w-4 h-4" />
+                                <GraduationCap className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                                Start Learning Now
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </motion.button>
                             <motion.button
                                 onClick={() => scrollTo('/events')}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="btn-outline text-sm px-7 py-3.5"
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="btn-outline text-base px-8 py-4 group"
                             >
-                                <Play className="w-4 h-4 text-blue-600 fill-blue-600" />
-                                My Dashboard
+                                <Play className="w-5 h-5 text-blue-600 fill-blue-600 group-hover:scale-110 transition-transform" />
+                                Explore Events
                             </motion.button>
                         </motion.div>
 

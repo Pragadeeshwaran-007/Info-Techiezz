@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Youtube, Linkedin, Instagram, ArrowRight } from 'lucide-react';
+import { Menu, X, Youtube, Linkedin, Instagram, ArrowRight, MessageCircle } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 const logo = "/Info techiezz logo.png";
 import { cn } from '@/lib/utils';
@@ -17,6 +17,7 @@ const socialLinks = [
     { name: 'YouTube', href: 'https://www.youtube.com/@infotechiezz', icon: Youtube, color: 'text-red-500' },
     { name: 'LinkedIn', href: 'http://www.linkedin.com/in/Infotechiezz', icon: Linkedin, color: 'text-blue-600' },
     { name: 'Instagram', href: 'https://www.instagram.com/infotechiezz/', icon: Instagram, color: 'text-pink-600' },
+    { name: 'WhatsApp', href: 'https://whatsapp.com/channel/0029Vb7QJZG8fewpER7N8U0V', icon: MessageCircle, color: 'text-green-600' },
 ];
 
 const Navbar = () => {
@@ -56,14 +57,11 @@ const Navbar = () => {
     return (
         <nav className={cn(
             "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 pt-4 pb-2",
-            scrolled ? "md:pt-4" : "md:pt-6",
-            !scrolled && location.pathname === '/events' && "text-white"
+            scrolled ? "md:pt-4" : "md:pt-6"
         )}>
             <div className={cn(
-                "max-w-5xl mx-auto rounded-2xl transition-all duration-300 border border-transparent",
-                scrolled
-                    ? "bg-white/80 backdrop-blur-xl border-gray-200 shadow-lg shadow-blue-500/5 py-2 px-4 md:px-6"
-                    : "bg-transparent py-2 px-4 md:px-6"
+                "max-w-5xl mx-auto rounded-3xl transition-all duration-300 border py-2 px-4 md:px-6 shadow-xl shadow-blue-500/5 bg-white/90 backdrop-blur-xl border-white/40",
+                scrolled ? "border-gray-200/50" : "border-white/50"
             )}>
                 <div className="flex items-center justify-between">
                     {/* Logo */}
@@ -75,20 +73,12 @@ const Navbar = () => {
                             <img
                                 src={logo}
                                 alt="InfoTechiezz"
-                                className={cn(
-                                    "h-10 w-10 object-contain transition-all duration-300",
-                                    !scrolled && location.pathname === '/events' ? "brightness-0 invert" : "mix-blend-multiply"
-                                )}
+                                className="h-10 w-10 object-contain transition-all duration-300 mix-blend-multiply"
                             />
                             <div className="absolute -inset-1 bg-blue-500/10 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
                         <div className="hidden sm:block">
-                            <span className={cn(
-                                "font-display text-lg font-black block leading-tight tracking-tight bg-clip-text text-transparent transition-all duration-300",
-                                !scrolled && location.pathname === '/events'
-                                    ? "bg-gradient-to-r from-blue-200 to-white"
-                                    : "bg-gradient-to-r from-[#002B5B] to-[#00E5FF]"
-                            )}>
+                            <span className="font-display text-lg font-black block leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#002B5B] to-[#00E5FF]">
                                 InfoTechiezz
                             </span>
                         </div>
@@ -101,12 +91,10 @@ const Navbar = () => {
                                 key={link.name}
                                 onClick={() => handleNavClick(link.href)}
                                 className={cn(
-                                    "px-4 py-2 rounded-xl text-sm font-semibold transition-all transition-colors",
+                                    "px-4 py-2 rounded-xl text-sm font-semibold transition-all",
                                     location.pathname === '/' && location.hash === link.href.replace('/', '')
                                         ? "text-blue-600 bg-blue-50"
-                                        : (!scrolled && location.pathname === '/events')
-                                            ? "text-white/90 hover:bg-white/10 hover:text-white"
-                                            : "text-gray-500 hover:bg-blue-50 hover:text-blue-600"
+                                        : "text-gray-500 hover:bg-blue-50 hover:text-blue-600"
                                 )}
                             >
                                 {link.name}
@@ -125,10 +113,8 @@ const Navbar = () => {
                                     rel="noopener noreferrer"
                                     whileHover={{ y: -2 }}
                                     className={cn(
-                                        "p-1.5 rounded-lg transition-colors",
-                                        (!scrolled && location.pathname === '/events')
-                                            ? "text-white/80 hover:bg-white/10 hover:text-white"
-                                            : cn("hover:bg-gray-100", s.color)
+                                        "p-1.5 rounded-lg transition-colors hover:bg-gray-100",
+                                        s.color
                                     )}
                                 >
                                     <s.icon className="w-4 h-4" />
@@ -138,11 +124,11 @@ const Navbar = () => {
                         <motion.button
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.98 }}
-                            onClick={() => handleNavClick('#courses')}
-                            className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-lg shadow-blue-600/20 flex items-center gap-1.5"
+                            onClick={() => handleNavClick('#contact')}
+                            className="px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-500/20 active:scale-95"
                         >
                             Get Started
-                            <ArrowRight className="w-3.5 h-3.5" />
+                            <ArrowRight className="w-4 h-4" />
                         </motion.button>
                     </div>
 
@@ -150,9 +136,7 @@ const Navbar = () => {
                     <button
                         className={cn(
                             "md:hidden p-2 rounded-xl border transition-all",
-                            (!scrolled && location.pathname === '/events')
-                                ? "bg-white/10 text-white border-white/20"
-                                : "bg-gray-50 text-gray-900 border-gray-200"
+                            "bg-gray-50 text-gray-900 border-gray-200"
                         )}
                         onClick={() => setIsOpen(!isOpen)}
                     >
