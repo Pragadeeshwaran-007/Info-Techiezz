@@ -1,12 +1,28 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { ArrowRight, Play, Star, Users, BookOpen, Trophy, CheckCircle, GraduationCap, Award, Clock } from 'lucide-react';
+import {
+    ArrowRight, Star, Users, BookOpen, Trophy, GraduationCap,
+    Award, Clock, Layout, Settings, FileCode, Play, Terminal
+} from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { cn } from '../lib/utils';
 
 /* ============================================================
    TYPEWRITER CODE SNIPPETS
    ============================================================ */
 const codeSnippets = [
+    {
+        lang: 'Python',
+        file: 'learn.py',
+        output: 'AI Ready! ✓',
+        lines: [
+            { tokens: [{ t: 'import ', c: '#60a5fa' }, { t: 'numpy', c: '#fde047' }, { t: ' as np', c: '#e2e8f0' }] },
+            { tokens: [{ t: 'import ', c: '#60a5fa' }, { t: 'pandas', c: '#fde047' }, { t: ' as pd', c: '#e2e8f0' }] },
+            { tokens: [{ t: 'def ', c: '#60a5fa' }, { t: 'train', c: '#4ade80' }, { t: '(data):', c: '#e2e8f0' }] },
+            { tokens: [{ t: '    model ', c: '#df9bfe' }, { t: '=', c: '#fb923c' }, { t: ' LinearRegression()', c: '#86efac' }] },
+            { tokens: [{ t: '    model.', c: '#e2e8f0' }, { t: 'fit', c: '#4ade80' }, { t: '(data)', c: '#e2e8f0' }] },
+        ],
+    },
     {
         lang: 'Java',
         file: 'Main.java',
@@ -16,58 +32,22 @@ const codeSnippets = [
             { tokens: [{ t: '  void ', c: '#60a5fa' }, { t: 'learn', c: '#4ade80' }, { t: '() {', c: '#e2e8f0' }] },
             { tokens: [{ t: '    System', c: '#fb923c' }, { t: '.out.', c: '#e2e8f0' }, { t: 'println', c: '#86efac' }, { t: '(', c: '#e2e8f0' }] },
             { tokens: [{ t: '      "InfoTechiezz!"', c: '#34d399' }] },
-            { tokens: [{ t: '    );', c: '#e2e8f0' }] },
-            { tokens: [{ t: '  }', c: '#e2e8f0' }] },
-            { tokens: [{ t: '}', c: '#e2e8f0' }] },
-        ],
-    },
-    {
-        lang: 'C',
-        file: 'main.c',
-        output: 'Pointers Mastered! ✓',
-        lines: [
-            { tokens: [{ t: '#include', c: '#a78bfa' }, { t: ' <stdio.h>', c: '#86efac' }] },
-            { tokens: [{ t: 'int ', c: '#60a5fa' }, { t: 'main', c: '#4ade80' }, { t: '() {', c: '#e2e8f0' }] },
-            { tokens: [{ t: '  int ', c: '#60a5fa' }, { t: 'x', c: '#fde047' }, { t: ' = 42;', c: '#e2e8f0' }] },
-            { tokens: [{ t: '  int ', c: '#60a5fa' }, { t: '*ptr', c: '#fb923c' }, { t: ' = &x;', c: '#e2e8f0' }] },
-            { tokens: [{ t: '  printf', c: '#4ade80' }, { t: '("', c: '#e2e8f0' }, { t: '%d', c: '#34d399' }, { t: '", *ptr);', c: '#e2e8f0' }] },
-            { tokens: [{ t: '  return ', c: '#60a5fa' }, { t: '0', c: '#fbbf24' }, { t: ';', c: '#e2e8f0' }] },
-            { tokens: [{ t: '}', c: '#e2e8f0' }] },
-        ],
-    },
-    {
-        lang: 'Python',
-        file: 'learn.py',
-        output: 'AI Ready! ✓',
-        lines: [
-            { tokens: [{ t: 'import ', c: '#60a5fa' }, { t: 'numpy', c: '#fde047' }, { t: ' as np', c: '#e2e8f0' }] },
-            { tokens: [{ t: 'import ', c: '#60a5fa' }, { t: 'pandas', c: '#fde047' }, { t: ' as pd', c: '#e2e8f0' }] },
-            { tokens: [{ t: 'def ', c: '#60a5fa' }, { t: 'train', c: '#4ade80' }, { t: '(data):', c: '#e2e8f0' }] },
-            { tokens: [{ t: '    model ', c: '#e2e8f0' }, { t: '=', c: '#fb923c' }, { t: ' LinearRegression()', c: '#86efac' }] },
-            { tokens: [{ t: '    model.', c: '#e2e8f0' }, { t: 'fit', c: '#4ade80' }, { t: '(data)', c: '#e2e8f0' }] },
-            { tokens: [{ t: '    return ', c: '#60a5fa' }, { t: 'model', c: '#fde047' }] },
         ],
     },
     {
         lang: 'HTML',
         file: 'index.html',
-        output: 'Website Live! ✓',
+        output: 'Web Live! ✓',
         lines: [
             { tokens: [{ t: '<!DOCTYPE ', c: '#fb923c' }, { t: 'html', c: '#60a5fa' }, { t: '>', c: '#fb923c' }] },
             { tokens: [{ t: '<html>', c: '#60a5fa' }] },
-            { tokens: [{ t: '  <head>', c: '#60a5fa' }] },
-            { tokens: [{ t: '    <title>', c: '#60a5fa' }, { t: 'InfoTechiezz', c: '#34d399' }, { t: '</title>', c: '#60a5fa' }] },
-            { tokens: [{ t: '  </head>', c: '#60a5fa' }] },
             { tokens: [{ t: '  <body>', c: '#60a5fa' }] },
-            { tokens: [{ t: '    <h1>', c: '#60a5fa' }, { t: 'Learn & Code', c: '#fde047' }, { t: '</h1>', c: '#60a5fa' }] },
+            { tokens: [{ t: '    <h1>', c: '#60a5fa' }, { t: 'Code the Future', c: '#fde047' }, { t: '</h1>', c: '#60a5fa' }] },
         ],
     },
 ];
 
-/* ============================================================
-   TYPEWRITER EDITOR COMPONENT
-   ============================================================ */
-const TypewriterEditor = () => {
+const TypewriterEditor = ({ isMobile }: { isMobile?: boolean }) => {
     const [snippetIdx, setSnippetIdx] = useState(0);
     const [visibleLines, setVisibleLines] = useState(0);
     const [phase, setPhase] = useState<'typing' | 'pause' | 'deleting'>('typing');
@@ -85,13 +65,13 @@ const TypewriterEditor = () => {
                 timeoutRef.current = setTimeout(() => setVisibleLines(v => v + 1), 220);
             } else {
                 setShowOutput(true);
-                timeoutRef.current = setTimeout(() => setPhase('pause'), 1800);
+                timeoutRef.current = setTimeout(() => setPhase('pause'), 2500);
             }
         } else if (phase === 'pause') {
             timeoutRef.current = setTimeout(() => {
                 setShowOutput(false);
                 setPhase('deleting');
-            }, 900);
+            }, 1200);
         } else if (phase === 'deleting') {
             if (visibleLines > 0) {
                 timeoutRef.current = setTimeout(() => setVisibleLines(v => v - 1), 80);
@@ -99,94 +79,94 @@ const TypewriterEditor = () => {
                 timeoutRef.current = setTimeout(() => {
                     setSnippetIdx(i => (i + 1) % codeSnippets.length);
                     setPhase('typing');
-                }, 300);
+                }, 400);
             }
         }
         return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
-    }, [phase, visibleLines, totalLines]);
+    }, [visibleLines, phase, totalLines]);
 
     return (
         <motion.div
-            animate={{
-                boxShadow: [
-                    '0 0 0 0 rgba(37,99,235,0.22)',
-                    '0 0 0 20px rgba(37,99,235,0)',
-                    '0 0 0 0 rgba(37,99,235,0)',
-                ]
-            }}
-            transition={{ duration: 2.5, repeat: Infinity }}
-            className="rounded-3xl overflow-hidden border border-blue-100"
-            style={{ background: '#0F172A', minHeight: 210 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-full bg-[#0F172A] rounded-2xl overflow-hidden shadow-2xl border border-white/10"
         >
-            {/* Title bar */}
-            <div className="px-4 py-2.5 flex items-center gap-2 bg-[#1e293b]">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
-                <span className="text-[9px] text-slate-500 ml-2 font-mono">{snippet.file}</span>
-                {/* Language badge */}
-                <span className="ml-auto text-[8px] px-1.5 py-0.5 rounded font-bold"
-                    style={{ background: 'rgba(96,165,250,0.15)', color: '#60a5fa' }}>
+            {/* Toolbar */}
+            <div className="bg-[#1E293B] px-3 md:px-4 py-2 md:py-2.5 flex items-center justify-between border-b border-white/5">
+                <div className="flex gap-1 md:gap-1.5">
+                    <div className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-[#FF5F56]" />
+                    <div className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-[#FFBD2E]" />
+                    <div className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-[#27C93F]" />
+                </div>
+                <div className="text-[8px] md:text-[10px] text-gray-400 font-mono tracking-wider flex items-center gap-1.5 md:gap-2">
+                    <Terminal className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                    {snippet.file}
+                </div>
+                <div className="px-1.5 md:px-2 py-0.5 rounded bg-blue-500/10 text-[7px] md:text-[9px] text-blue-400 font-bold border border-blue-500/20 uppercase tracking-tighter">
                     {snippet.lang}
-                </span>
+                </div>
             </div>
 
-            {/* Code area */}
-            <div className="px-4 py-3 font-mono text-[9.5px] leading-[1.7] min-h-[140px]">
-                {snippet.lines.slice(0, visibleLines).map((line, li) => (
-                    <div key={li} className="flex items-center">
-                        {line.tokens.map((tok, ti) => (
-                            <span key={ti} style={{ color: tok.c }}>{tok.t}</span>
-                        ))}
-                        {/* blinking cursor on last visible line */}
-                        {li === visibleLines - 1 && (
-                            <span className="inline-block w-1.5 h-3.5 ml-0.5 align-middle rounded-sm"
-                                style={{ background: '#60a5fa', animation: 'blink 0.9s step-end infinite' }} />
-                        )}
+            {/* Code Content */}
+            <div className={cn(
+                "p-3 md:p-5 font-mono leading-relaxed",
+                isMobile ? "min-h-[120px] text-[9px]" : "min-h-[160px] text-[11px]"
+            )}>
+                {snippet.lines.slice(0, visibleLines).map((line, lid) => (
+                    <div key={lid} className="flex gap-2 md:gap-4">
+                        <span className="text-gray-600 w-2 md:w-3 text-right select-none">{lid + 1}</span>
+                        <div className="flex flex-wrap">
+                            {line.tokens.map((token, tid) => (
+                                <span key={tid} style={{ color: token.c }}>{token.t}</span>
+                            ))}
+                            {lid === visibleLines - 1 && phase === 'typing' && (
+                                <motion.div
+                                    animate={{ opacity: [1, 0] }}
+                                    transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                                    className="w-1 md:w-1.5 h-3 md:h-3.5 bg-blue-500 ml-0.5 md:ml-1 inline-block"
+                                />
+                            )}
+                        </div>
                     </div>
                 ))}
-                {visibleLines === 0 && (
-                    <span className="inline-block w-1.5 h-3.5 align-middle rounded-sm"
-                        style={{ background: '#60a5fa', animation: 'blink 0.9s step-end infinite' }} />
-                )}
             </div>
 
-            {/* Output bar */}
-            <motion.div
-                initial={false}
-                animate={{ opacity: showOutput ? 1 : 0, y: showOutput ? 0 : 4 }}
-                transition={{ duration: 0.3 }}
-                className="px-4 py-2 flex items-center gap-2"
-                style={{ background: '#064e3b' }}
-            >
-                <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                <span className="font-mono text-[9px] text-green-300">{snippet.output}</span>
-            </motion.div>
-
-            <style>{`@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }`}</style>
+            {/* Console Output */}
+            <AnimatePresence>
+                {showOutput && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="bg-[#064e3b] px-3 md:px-5 py-2 md:py-2.5 flex items-center gap-2 border-t border-white/5"
+                    >
+                        <div className="w-1 md:w-1.5 h-1 md:h-1.5 rounded-full bg-green-400 animate-pulse" />
+                        <span className="font-mono text-[8px] md:text-[10px] text-green-300 tracking-wide">{snippet.output}</span>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.div>
     );
 };
 
+/* ============================================================
+   ORBITING ICONS DATA
+   ============================================================ */
+const orbitIcons = [
+    { id: 1, emoji: '☕', label: 'Java', color: '#B07219', bg: '#FFF7ED' },
+    { id: 2, emoji: '⚙️', label: 'C++', color: '#00599C', bg: '#EFF6FF' },
+    { id: 3, emoji: '🐍', label: 'Python', color: '#3776AB', bg: '#F0FDFA' },
+    { id: 4, emoji: '📄', label: 'HTML', color: '#E34F26', bg: '#FFF1F2' },
+    { id: 5, emoji: '🏆', label: 'Contests', color: '#F59E0B', bg: '#FFFBEB' },
+    { id: 6, emoji: '🎓', label: 'Certified', color: '#10B981', bg: '#ECFDF5' },
+    { id: 7, emoji: '⚙️', label: 'Core', color: '#6366F1', bg: '#EEF2FF' },
+    { id: 8, emoji: '👥', label: '1k+', color: '#EC4899', bg: '#FDF2F8' },
+];
+
 const featurePills = [
-    {
-        icon: GraduationCap,
-        label: 'Expert Instructors',
-        color: '#2563EB',
-        bg: '#EFF6FF',
-    },
-    {
-        icon: Award,
-        label: 'Certified Courses',
-        color: '#06B6D4',
-        bg: '#ECFEFF',
-    },
-    {
-        icon: Clock,
-        label: 'Lifetime Access',
-        color: '#14b8a6',
-        bg: '#F0FDFA',
-    },
+    { icon: GraduationCap, label: 'Expert Instructors', color: '#2563EB', bg: '#EFF6FF' },
+    { icon: Award, label: 'Certified Courses', color: '#06B6D4', bg: '#ECFEFF' },
+    { icon: Clock, label: 'Lifetime Access', color: '#14b8a6', bg: '#F0FDFA' },
 ];
 
 const stats = [
@@ -198,6 +178,40 @@ const stats = [
 const Hero = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [shuffledIcons, setShuffledIcons] = useState(orbitIcons);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+    // Track window width for responsive scaling
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const isMobile = windowWidth < 768;
+    const isTablet = windowWidth >= 768 && windowWidth < 1024;
+
+    // Dynamic scaling factors
+    const containerSize = isMobile ? 320 : isTablet ? 420 : 480;
+    const orbitRadius = (containerSize / 2) - (isMobile ? 20 : 0);
+
+    // Shuffle icons every 10 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setShuffledIcons(prev => [...prev].sort(() => Math.random() - 0.5));
+        }, 10000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!containerRef.current || isMobile) return;
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) / 25;
+        const y = (e.clientY - rect.top - rect.height / 2) / 25;
+        setMousePos({ x, y });
+    };
 
     const scrollTo = (href: string) => {
         if (href.startsWith('/')) { navigate(href); return; }
@@ -210,290 +224,263 @@ const Hero = () => {
     };
 
     return (
-        <section id="home" className="relative pt-20 pb-0 overflow-hidden">
-            {/* Hero background */}
-            <div className="absolute inset-0 pointer-events-none"
-                style={{ background: 'linear-gradient(160deg, #EEF5FF 0%, #E4EFFF 50%, #F0F9FF 100%)' }} />
-            <div className="absolute inset-0 bg-dot-grid opacity-60 pointer-events-none" />
-            {/* Glow blob */}
-            <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%)' }} />
+        <section
+            id="home"
+            ref={containerRef}
+            onMouseMove={handleMouseMove}
+            className="relative pt-24 pb-12 overflow-hidden min-h-[90vh] flex items-center"
+        >
+            {/* Background Grid & Particles */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="hidden lg:block absolute inset-0 bg-dot-grid opacity-[0.4]" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-50/50 via-white to-sky-50/50" />
+                <div className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-blue-400/10 rounded-full blur-[120px]" />
+                <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-indigo-400/10 rounded-full blur-[100px]" />
+            </div>
 
-            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center min-h-[calc(100vh-64px)]">
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
+                <div className="grid lg:grid-cols-2 gap-12 xl:gap-24 items-center">
 
-                    {/* === LEFT === */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 32 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, ease: 'easeOut' }}
-                        className="py-16 text-center lg:text-left"
-                    >
-                        {/* Tag */}
+                    {/* LEFT CONTENT */}
+                    <div className="text-center lg:text-left order-2 lg:order-1">
                         <motion.div
-                            initial={{ opacity: 0, y: 12 }}
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.05 }}
-                            className="inline-flex items-center gap-2 mb-6"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-[10px] md:text-xs font-bold mb-6 md:mb-8 uppercase tracking-widest shadow-sm"
                         >
-                            <span className="badge-pill">
-                                ✦ Welcome to InfoTechiezz
-                            </span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
+                            ✦ Welcome to InfoTechiezz
                         </motion.div>
 
-                        {/* Headline */}
-                        <h1 className="section-heading mb-6 tracking-tight">
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-3xl md:text-5xl lg:text-6xl font-black font-display text-gray-900 leading-[1.1] mb-6 tracking-tight"
+                        >
                             Elevate Your Career with{' '}
                             <span className="relative inline-block">
-                                <span className="gradient-text relative z-10">Industry-Level</span>
-                                <motion.span
+                                <span className="gradient-text">Industry-Level</span>
+                                <motion.div
                                     initial={{ width: 0 }}
                                     animate={{ width: '100%' }}
-                                    transition={{ duration: 1, delay: 0.8 }}
-                                    className="absolute bottom-1.5 left-0 h-3 bg-blue-500/10 -z-0 rounded-full"
+                                    transition={{ duration: 1, delay: 1 }}
+                                    className="absolute -bottom-1 left-0 h-3 bg-blue-500/10 -z-10 rounded-full"
                                 />
                             </span>{' '}
                             Courses
-                        </h1>
+                        </motion.h1>
 
-                        <p className="text-gray-500 text-base md:text-lg mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                            Master <span className="text-blue-600 font-bold">Java, C++, Python</span> and modern web development. Join 1,000+ learners building the future through live contests and expert-led sessions.
-                        </p>
-
-                        {/* Feature pills row */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 16 }}
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10"
+                            className="text-gray-500 text-base md:text-lg lg:text-xl mb-8 md:mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium"
                         >
+                            Master <span className="text-blue-600 font-bold">Java, C++, Python</span> and modern web development. Join 1,000+ learners building the future through live contests.
+                        </motion.p>
+
+                        <div className="flex flex-wrap gap-2 md:gap-4 justify-center lg:justify-start mb-8 md:mb-10">
                             {featurePills.map((pill, i) => (
                                 <motion.div
                                     key={pill.label}
-                                    initial={{ opacity: 0, x: -10 }}
+                                    initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.3 + i * 0.1 }}
-                                    className="feature-pill"
+                                    className="feature-pill text-[10px] md:text-sm neumorphism-soft hover:scale-105 transition-all cursor-default"
                                 >
-                                    <div className="pill-icon shadow-sm" style={{ background: pill.bg }}>
-                                        <pill.icon className="w-4 h-4" style={{ color: pill.color }} />
+                                    <div className="pill-icon shadow-inner w-7 h-7 md:w-8 md:h-8" style={{ background: pill.bg }}>
+                                        <pill.icon className="w-3.5 h-3.5 md:w-4 md:h-4" style={{ color: pill.color }} />
                                     </div>
-                                    <span className="tracking-tight">{pill.label}</span>
+                                    {pill.label}
                                 </motion.div>
                             ))}
-                        </motion.div>
+                        </div>
 
-                        {/* CTA Buttons */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.35 }}
-                            className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start mb-12"
-                        >
+                        <div className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center lg:justify-start mb-10 md:mb-12">
                             <motion.button
-                                onClick={() => scrollTo('#courses')}
-                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileHover={{ scale: 1.05, y: -4 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="btn-primary text-base px-8 py-4 group"
+                                onClick={() => scrollTo('#courses')}
+                                className="btn-primary text-sm md:text-base px-6 md:px-8 py-3 md:py-4"
                             >
-                                <GraduationCap className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                                <GraduationCap className="w-4 h-4 md:w-5 md:h-5" />
                                 Start Learning Now
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                             </motion.button>
                             <motion.button
-                                onClick={() => scrollTo('/events')}
-                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileHover={{ scale: 1.05, y: -4 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="btn-outline text-base px-8 py-4 group"
+                                onClick={() => scrollTo('/events')}
+                                className="btn-outline text-sm md:text-base px-6 md:px-8 py-3 md:py-4"
                             >
-                                <Play className="w-5 h-5 text-blue-600 fill-blue-600 group-hover:scale-110 transition-transform" />
+                                <Play className="w-4 h-4 md:w-5 md:h-5 text-blue-600 fill-blue-600" />
                                 Explore Events
                             </motion.button>
-                        </motion.div>
+                        </div>
 
-                        {/* Stats */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.45 }}
-                            className="flex items-center gap-8 justify-center lg:justify-start flex-wrap"
-                        >
+                        <div className="flex flex-wrap items-center gap-6 md:gap-10 justify-center lg:justify-start">
                             {stats.map((s, i) => (
-                                <div key={i} className="flex items-center gap-2">
-                                    <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                        style={{ background: 'rgba(37,99,235,0.1)' }}>
-                                        <s.icon className="w-4 h-4 text-blue-600" />
+                                <motion.div key={s.label}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.6 + i * 0.1 }}
+                                    className="flex items-center gap-2.5 md:gap-3"
+                                >
+                                    <div className="w-10 h-10 md:w-11 md:h-11 rounded-2xl bg-white shadow-md flex items-center justify-center border border-gray-100">
+                                        <s.icon className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
                                     </div>
                                     <div>
-                                        <div className="text-lg font-bold font-display text-gray-900 leading-none">{s.value}</div>
-                                        <div className="text-xs text-gray-400 mt-0.5">{s.label}</div>
+                                        <div className="text-lg md:text-xl font-black font-display text-gray-900 leading-none">{s.value}</div>
+                                        <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-1">{s.label}</div>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
-                            <div className="flex items-center gap-1.5">
-                                <div className="flex gap-0.5">
-                                    {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />)}
-                                </div>
-                                <span className="text-sm font-semibold text-gray-700">4.9</span>
-                                <span className="text-xs text-gray-400">reviews</span>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-
-                    {/* === RIGHT: Code Universe Illustration === */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.92 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
-                        className="hidden lg:flex items-center justify-center relative py-12 w-full"
-                    >
-                        {/* ── UNIVERSE SVG ── */}
-                        <div className="relative w-[480px] h-[480px]">
-
-                            {/* Outer glow rings (CSS) */}
-                            <div className="absolute inset-0 rounded-full pointer-events-none"
-                                style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%)' }} />
-
-                            {/* Orbit track ring 1 */}
-                            <div className="absolute inset-8 rounded-full border border-dashed"
-                                style={{ borderColor: 'rgba(37,99,235,0.15)' }} />
-                            {/* Orbit track ring 2 */}
-                            <div className="absolute inset-24 rounded-full border"
-                                style={{ borderColor: 'rgba(6,182,212,0.2)' }} />
-
-                            {/* ── ORBITING LANGUAGE ICONS ── */}
-                            {[
-                                { label: 'Java', emoji: '☕', color: '#f97316', bg: '#FFF7ED', angle: 0 },
-                                { label: 'C', emoji: '⚙️', color: '#2563EB', bg: '#EFF6FF', angle: 60 },
-                                { label: 'Python', emoji: '🐍', color: '#a855f7', bg: '#FAF5FF', angle: 120 },
-                                { label: 'HTML', emoji: '📄', color: '#ef4444', bg: '#FFF1F2', angle: 180 },
-                                { label: 'CSS', emoji: '🎨', color: '#06B6D4', bg: '#ECFEFF', angle: 240 },
-                                { label: 'C++', emoji: '💡', color: '#14b8a6', bg: '#F0FDFA', angle: 300 },
-                            ].map((lang, i) => {
-                                const rad = (lang.angle * Math.PI) / 180;
-                                const r = 196; // orbit radius px from center
-                                const cx = 240 + r * Math.cos(rad);
-                                const cy = 240 + r * Math.sin(rad);
-                                return (
-                                    <motion.div
-                                        key={lang.label}
-                                        animate={{ y: [0, i % 2 === 0 ? -8 : 8, 0] }}
-                                        transition={{ duration: 3 + i * 0.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.3 }}
-                                        className="absolute z-10 flex flex-col items-center gap-1"
-                                        style={{ left: cx - 28, top: cy - 28, width: 56 }}
-                                    >
-                                        <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-md border"
-                                            style={{ background: lang.bg, borderColor: `${lang.color}25` }}>
-                                            {lang.emoji}
-                                        </div>
-                                        <span className="text-[10px] font-bold text-gray-500">{lang.label}</span>
-                                    </motion.div>
-                                );
-                            })}
-
-                            {/* ── CENTRE: Typewriter Code Editor ── */}
-                            <div className="absolute"
-                                style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', width: 210 }}>
-                                <TypewriterEditor />
-                            </div>
-
-                            {/* ── FLOATING SKILL ARC CARDS ── */}
-                            {/* Top-right: Live Sessions */}
-                            <motion.div
-                                animate={{ y: [0, -10, 0] }}
-                                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                                className="absolute -top-2 right-4 z-20"
-                            >
-                                <div className="bg-white rounded-2xl shadow-lg border border-blue-50 px-4 py-3 min-w-[160px]">
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <span className="inline-block w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                                        <span className="text-[10px] text-green-500 font-bold">LIVE NOW</span>
-                                    </div>
-                                    <div className="text-xs font-bold text-gray-800">Java Masterclass</div>
-                                    <div className="text-[10px] text-gray-400">248 watching</div>
-                                </div>
-                            </motion.div>
-
-                            {/* Bottom-left: Skill level card */}
-                            <motion.div
-                                animate={{ y: [0, 10, 0] }}
-                                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                                className="absolute bottom-0 -left-6 z-20"
-                            >
-                                <div className="bg-white rounded-2xl shadow-lg border border-blue-50 px-4 py-3 min-w-[180px]">
-                                    <div className="text-[10px] text-gray-400 mb-2 font-semibold uppercase tracking-wider">Skill Progress</div>
-                                    {[
-                                        { label: 'Problem Solving', pct: 88, color: '#2563EB' },
-                                        { label: 'Data Structures', pct: 72, color: '#06B6D4' },
-                                        { label: 'Algorithms', pct: 65, color: '#a855f7' },
-                                    ].map((s) => (
-                                        <div key={s.label} className="mb-2">
-                                            <div className="flex justify-between mb-0.5">
-                                                <span className="text-[9px] text-gray-500 font-medium">{s.label}</span>
-                                                <span className="text-[9px] font-bold" style={{ color: s.color }}>{s.pct}%</span>
-                                            </div>
-                                            <div className="h-1 rounded-full bg-gray-100 overflow-hidden">
-                                                <motion.div
-                                                    initial={{ width: 0 }}
-                                                    animate={{ width: `${s.pct}%` }}
-                                                    transition={{ duration: 1.4, delay: 0.8 + Math.random() * 0.4, ease: 'easeOut' }}
-                                                    className="h-full rounded-full"
-                                                    style={{ background: s.color }}
-                                                />
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </motion.div>
-
-                            {/* Bottom-right: Students card */}
-                            <motion.div
-                                animate={{ y: [0, -7, 0] }}
-                                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                                className="absolute bottom-4 right-0 z-20"
-                            >
-                                <div className="bg-white rounded-2xl shadow-lg border border-blue-50 px-4 py-3">
-                                    <div className="flex items-center -space-x-2 mb-2">
-                                        {['#2563EB', '#06B6D4', '#14b8a6', '#a855f7', '#f97316'].map((c) => (
-                                            <div key={c} className="w-7 h-7 rounded-full border-2 border-white"
-                                                style={{ background: c }} />
-                                        ))}
-                                    </div>
-                                    <div className="text-xs font-bold text-gray-800">1k+ Learners</div>
-                                    <div className="text-[10px] text-gray-400">Learning globally</div>
-                                </div>
-                            </motion.div>
-
-                            {/* Top-left: Certificate badge */}
-                            <motion.div
-                                animate={{ y: [0, 8, 0] }}
-                                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-                                className="absolute top-8 -left-4 z-20"
-                            >
-                                <div className="bg-white rounded-2xl shadow-lg border border-amber-100 px-4 py-3 min-w-[150px]">
-                                    <div className="text-lg mb-1">🏆</div>
-                                    <div className="text-xs font-bold text-gray-800">Certificate Earned!</div>
-                                    <div className="flex items-center gap-1 mt-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <Star key={i} className="w-2.5 h-2.5 text-yellow-400 fill-yellow-400" />
-                                        ))}
-                                        <span className="text-[9px] text-gray-400 ml-0.5">4.9</span>
-                                    </div>
-                                </div>
-                            </motion.div>
-
                         </div>
-                    </motion.div>
+                    </div>
+
+                    {/* RIGHT ILLUSTRATION - ORBIT SYSTEM - HIDDEN ON MOBILE/TABLET */}
+                    <div className="hidden lg:flex relative items-center justify-center min-h-[500px] order-1 lg:order-2">
+                        <motion.div
+                            style={{
+                                x: mousePos.x,
+                                y: mousePos.y,
+                                width: containerSize,
+                                height: containerSize
+                            }}
+                            className="relative flex items-center justify-center"
+                        >
+                            <div className="absolute inset-[20%] rounded-full border-[2px] md:border-[3px] border-blue-500/10 shadow-[0_0_80px_rgba(59,130,246,0.1)] bg-white/5" />
+                            <div className="absolute inset-0 rounded-full border-[1px] md:border-[1.5px] border-dashed border-blue-200/30" />
+
+                            <div className="absolute inset-0 animate-orbit">
+                                <AnimatePresence mode="popLayout">
+                                    {shuffledIcons.map((icon, i) => {
+                                        const angle = (i * 360) / shuffledIcons.length;
+                                        const radian = (angle * Math.PI) / 180;
+                                        const x = orbitRadius * Math.cos(radian);
+                                        const y = orbitRadius * Math.sin(radian);
+                                        const iconSize = isMobile ? 48 : 56;
+
+                                        return (
+                                            <motion.div
+                                                key={icon.id}
+                                                initial={{ opacity: 0, scale: 0 }}
+                                                animate={{
+                                                    opacity: 1,
+                                                    scale: 1,
+                                                    left: `calc(50% + ${x}px - ${iconSize / 2}px)`,
+                                                    top: `calc(50% + ${y}px - ${iconSize / 2}px)`,
+                                                }}
+                                                exit={{ opacity: 0, scale: 0 }}
+                                                transition={{ type: 'spring', stiffness: 100, damping: 15, delay: i * 0.05 }}
+                                                style={{
+                                                    position: 'absolute',
+                                                    width: iconSize,
+                                                    height: iconSize,
+                                                }}
+                                                className="z-20"
+                                            >
+                                                <div className="w-full h-full animate-orbit-counter">
+                                                    <div className="w-full h-full animate-float-micro" style={{ animationDelay: `${i * 0.4}s` }}>
+                                                        <div className="w-full h-full rounded-full neumorphism-soft flex flex-col items-center justify-center gap-0.5 border border-white hover:border-blue-200 hover:scale-110 transition-all group cursor-pointer shadow-lg animate-glow-pulse">
+                                                            <span className="text-base md:text-xl group-hover:scale-125 transition-transform">{icon.emoji}</span>
+                                                            <span className="text-[6px] md:text-[7px] font-black text-gray-400 uppercase tracking-tighter">{icon.label}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        );
+                                    })}
+                                </AnimatePresence>
+                            </div>
+
+                            <div className="relative z-30 perspective-1000" style={{ width: isMobile ? 180 : 240 }}>
+                                <motion.div whileHover={{ rotateY: 5, rotateX: -5 }} transition={{ type: 'spring', stiffness: 200 }}>
+                                    <TypewriterEditor isMobile={isMobile} />
+                                </motion.div>
+                            </div>
+
+                            {/* FLOATING GLASS CARDS */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{
+                                    opacity: 1, scale: 1,
+                                    x: isMobile ? -10 : 0,
+                                    y: isMobile ? containerSize / 2 : 60
+                                }}
+                                className="absolute -bottom-8 -left-12 z-40 glass-premium p-3 md:p-4 rounded-xl md:rounded-2xl w-[140px] md:w-[190px] shadow-xl"
+                            >
+                                <div className="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-2 md:mb-3">Skill Progress</div>
+                                {[{ l: 'Java', p: 85, c: '#3b82f6' }, { l: 'DSA', p: 72, c: '#06b6d4' }, { l: 'Python', p: 65, c: '#a855f7' }].map(s => (
+                                    <div key={s.l} className="mb-2 md:mb-2.5 last:mb-0">
+                                        <div className="flex justify-between text-[8px] md:text-[9px] font-bold text-gray-700 mb-0.5 md:mb-1">
+                                            <span>{s.l}</span><span>{s.p}%</span>
+                                        </div>
+                                        <div className="h-0.5 md:h-1 rounded-full bg-gray-200/50 overflow-hidden">
+                                            <motion.div initial={{ width: 0 }} animate={{ width: `${s.p}%` }} transition={{ duration: 1.5, delay: 1.5 }}
+                                                className="h-full rounded-full" style={{ background: s.c }} />
+                                        </div>
+                                    </div>
+                                ))}
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{
+                                    opacity: 1, scale: 1,
+                                    x: isMobile ? 10 : 0,
+                                    y: isMobile ? -containerSize / 2 : -60
+                                }}
+                                className="absolute -top-10 -right-8 z-40 glass-premium px-4 md:px-5 py-2.5 md:py-3 rounded-xl md:rounded-2xl min-w-[120px] md:min-w-[160px] shadow-xl"
+                            >
+                                <div className="flex items-center gap-1.5 md:gap-2 mb-1 md:mb-1.5">
+                                    <div className="w-1 md:w-1.5 h-1 md:h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                    <span className="text-[8px] md:text-[9px] font-black text-green-500 tracking-widest uppercase">Live Now</span>
+                                </div>
+                                <div className="text-[10px] md:text-[11px] font-black text-gray-800">Java Masterclass</div>
+                                <div className="text-[8px] md:text-[9px] text-gray-400 font-bold">248 Learners</div>
+                            </motion.div>
+
+                            {!isMobile && (
+                                <>
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -80 }}
+                                        animate={{ opacity: 1, x: -60 }}
+                                        className="absolute top-1/2 -left-32 -translate-y-1/2 z-40 glass-premium px-5 py-3 rounded-2xl flex flex-col items-center shadow-xl"
+                                    >
+                                        <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mb-2">
+                                            <Award className="w-5 h-5 text-orange-600" />
+                                        </div>
+                                        <div className="text-[10px] font-black text-gray-800">Certificate Earned!</div>
+                                        <div className="flex gap-0.5 mt-1">
+                                            {[...Array(5)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 text-yellow-400 fill-yellow-400" />)}
+                                        </div>
+                                    </motion.div>
+
+                                    <motion.div
+                                        initial={{ opacity: 0, x: 80 }}
+                                        animate={{ opacity: 1, x: 60 }}
+                                        className="absolute bottom-1/4 -right-16 z-40 glass-premium p-3 rounded-2xl shadow-xl"
+                                    >
+                                        <div className="flex -space-x-2 mb-2">
+                                            {[1, 2, 3, 4, 5].map(i => (
+                                                <div key={i} className="w-7 h-7 rounded-full border-2 border-white shadow-sm"
+                                                    style={{ background: `hsl(${i * 60}, 70%, 60%)` }} />
+                                            ))}
+                                        </div>
+                                        <div className="text-[11px] font-black text-gray-800 leading-tight">1k+ Learners</div>
+                                        <span className="text-[9px] text-gray-400 font-bold">Learning globally</span>
+                                    </motion.div>
+                                </>
+                            )}
+                        </motion.div>
+                    </div>
 
                 </div>
             </div>
 
-            {/* Wave bottom */}
-            <div className="relative z-10 -mb-1">
-                <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full block">
-                    <path d="M0,60 C240,20 480,80 720,50 C960,20 1200,70 1440,40 L1440,80 L0,80 Z" fill="white" />
-                </svg>
-            </div>
+            <style>{`.perspective-1000 { perspective: 1000px; }`}</style>
         </section>
     );
 };
