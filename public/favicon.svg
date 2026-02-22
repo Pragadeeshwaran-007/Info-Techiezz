@@ -1,0 +1,18 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stylized Z with Circuit Paths and Arrow -->
+  <path d="M30 40H85M30 40C25 40 25 45 30 50H70C75 50 78 53 78 58V70C78 75 75 78 70 78H45M45 78C40 78 40 83 45 88H100" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Diagonal Circuit Lines -->
+  <path d="M45 78L78 45" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  
+  <!-- Arrow -->
+  <path d="M85 30L105 30V50" stroke="#06B6D4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M75 60L105 30" stroke="#06B6D4" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Circuit Dots -->
+  <circle cx="35" cy="40" r="4" fill="#06B6D4"/>
+  <circle cx="55" cy="40" r="4" fill="#06B6D4"/>
+  <circle cx="75" cy="88" r="4" fill="#06B6D4"/>
+  <circle cx="95" cy="88" r="4" fill="#06B6D4"/>
+  <circle cx="62" cy="62" r="4" fill="#06B6D4"/>
+</svg>
