@@ -17,7 +17,7 @@ const testimonials = [
         color: "#06B6D4"
     },
     {
-        name: "Ari Prakesh N",
+        name: "AriPrakash N",
         role: "Cloud Engineer",
         content: "If you want to learn web development from scratch, this is the place. The hands-on project approach is what makes it different from other platforms.",
         rating: 5,
@@ -191,4 +191,5 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
 };
 
 export default Community;
+
 
