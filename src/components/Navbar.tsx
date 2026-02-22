@@ -73,12 +73,12 @@ const Navbar = () => {
                             <img
                                 src={logo}
                                 alt="InfoTechiezz"
-                                className="h-10 w-10 object-contain transition-all duration-300 mix-blend-multiply"
+                                className="h-8 w-8 md:h-10 md:w-10 object-contain transition-all duration-300 mix-blend-multiply"
                             />
                             <div className="absolute -inset-1 bg-blue-500/10 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
-                        <div className="hidden sm:block">
-                            <span className="font-display text-lg font-black block leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#002B5B] to-[#00E5FF]">
+                        <div className="block">
+                            <span className="font-display text-base md:text-lg font-black block leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#002B5B] to-[#00E5FF]">
                                 InfoTechiezz
                             </span>
                         </div>
@@ -135,12 +135,12 @@ const Navbar = () => {
                     {/* Mobile Toggle */}
                     <button
                         className={cn(
-                            "md:hidden p-2 rounded-xl border transition-all",
-                            "bg-gray-50 text-gray-900 border-gray-200"
+                            "md:hidden p-2.5 rounded-xl transition-all active:scale-95",
+                            "text-gray-900 hover:bg-gray-100"
                         )}
                         onClick={() => setIsOpen(!isOpen)}
                     >
-                        {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                        {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-6 h-6" />}
                     </button>
                 </div>
             </div>
