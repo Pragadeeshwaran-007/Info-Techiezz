@@ -79,6 +79,11 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --input: 214 32% 91%;
+
+    /* Glass tokens */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-blur: 16px;
   }
 }
 
@@ -162,6 +167,26 @@
     border-radius: var(--radius);
     color: white;
     box-shadow: var(--shadow-blue);
+  }
+
+  /* === Premium Glassmorphism === */
+  .glass-premium {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  }
+
+  .glass-card-hover {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .glass-card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 45px -10px rgba(37, 99, 235, 0.15);
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(37, 99, 235, 0.2);
   }
 
   /* Course card top border colour strip */
@@ -414,7 +439,7 @@
 
   /* === Background / dot pattern === */
   .bg-dot-grid {
-    background-image: radial-gradient(circle, hsl(var(--blue) / 0.12) 1px, transparent 1px);
+    background-image: radial-gradient(circle, hsl(var(--blue) / 0.25) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
@@ -580,4 +605,87 @@
   100% {
     box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
   }
+}
+
+/* === Custom SaaS Animations === */
+@keyframes orbit-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-counter-rotate {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes float-micro {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-3px) rotate(1deg);
+  }
+
+  66% {
+    transform: translateY(2px) rotate(-1deg);
+  }
+}
+
+@keyframes shimmer-fast {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px rgba(37, 99, 235, 0.3));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 12px rgba(37, 99, 235, 0.6));
+  }
+}
+
+.animate-orbit {
+  animation: orbit-rotate 60s linear infinite;
+}
+
+.animate-orbit-counter {
+  animation: orbit-counter-rotate 60s linear infinite;
+}
+
+.animate-float-micro {
+  animation: float-micro 5s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Neumorphism style utilities */
+.neumorphism-soft {
+  background: white;
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.03),
+    -6px -6px 15px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
