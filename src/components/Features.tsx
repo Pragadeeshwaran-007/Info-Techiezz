@@ -134,10 +134,10 @@ const Features = () => {
         </motion.div>
 
         {/* ── SPLIT SCREEN ── */}
-        <div className="grid lg:grid-cols-5 gap-5 mb-8" style={{ minHeight: 420 }}>
+        <div className="grid lg:grid-cols-5 gap-6 md:gap-10 mb-8" style={{ minHeight: 'auto' }}>
 
           {/* LEFT — Spotlight panel */}
-          <div className="lg:col-span-3 relative rounded-3xl overflow-hidden" style={{ minHeight: 380 }}>
+          <div className="lg:col-span-3 relative rounded-3xl overflow-hidden min-h-[460px] md:min-h-[500px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
@@ -178,9 +178,9 @@ const Features = () => {
                 </div>
 
                 {/* Bottom: highlights */}
-                <div className="relative z-10 flex flex-wrap gap-2">
+                <div className="relative z-10 flex flex-wrap gap-2 mb-4 md:mb-0">
                   {f.highlights.map((h, i) => (
-                    <span key={i} className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full"
+                    <span key={i} className="flex items-center gap-1.5 text-[10px] md:text-xs font-semibold px-3 py-1.5 rounded-full whitespace-nowrap"
                       style={{ background: 'rgba(255,255,255,0.15)', color: 'white', border: '1px solid rgba(255,255,255,0.22)' }}>
                       <span className="w-1.5 h-1.5 rounded-full bg-white/70" />
                       {h}
@@ -188,17 +188,18 @@ const Features = () => {
                   ))}
                 </div>
 
-                {/* Progress dots */}
-                <div className="absolute bottom-5 right-6 flex gap-1.5">
+                {/* Progress dots - Moved to top-right on mobile to avoid overlap */}
+                <div className="absolute top-8 right-8 md:top-auto md:bottom-8 md:right-10 flex gap-2 z-20">
                   {features.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setActive(i)}
-                      className="rounded-full transition-all"
+                      className="rounded-full transition-all duration-300"
                       style={{
-                        width: i === active ? 20 : 6,
-                        height: 6,
-                        background: i === active ? 'white' : 'rgba(255,255,255,0.35)',
+                        width: i === active ? 24 : 8,
+                        height: 8,
+                        background: i === active ? 'white' : 'rgba(255,255,255,0.3)',
+                        boxShadow: i === active ? '0 0 10px rgba(255,255,255,0.5)' : 'none'
                       }}
                     />
                   ))}
