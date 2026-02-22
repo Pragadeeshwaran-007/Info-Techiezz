@@ -10,56 +10,56 @@ const testimonials = [
         color: "#2563EB"
     },
     {
-        name: "Lithika",
+        name: "Lithika M",
         role: "MERN Stack Developer",
         content: "Their free C programming resources and the placement series helped me build a strong foundation. I landed my first job as a developer thanks to their guidance!",
         rating: 5,
         color: "#06B6D4"
     },
     {
-        name: "Ari Prakesh",
+        name: "Ari Prakesh N",
         role: "Cloud Engineer",
         content: "If you want to learn web development from scratch, this is the place. The hands-on project approach is what makes it different from other platforms.",
         rating: 5,
         color: "#14b8a6"
     },
     {
-        name: "Deepa",
+        name: "Deepa J",
         role: "Network Engineer",
         content: "Simple and crisp programming tutorials. The community support on Discord is 24/7. My doubts were cleared within minutes!",
         rating: 5,
         color: "#f59e0b"
     },
     {
-        name: "Bala Murgan",
+        name: "Bala Murgan R",
         role: "Backend Engineer",
         content: "I started with zero coding knowledge. Now, I am proficient in Python and Java. The structured roadmap is a life-saver for beginners.",
         rating: 5,
         color: "#7c3aed"
     },
     {
-        name: "Boomika",
+        name: "Boomika N",
         role: "Python Developer",
         content: "The TCS NQT Placement Series is a must-watch. It covered exactly what was asked in the interview. I am now working at my dream company!",
         rating: 5,
         color: "#ec4899"
     },
     {
-        name: "Venkatesh",
+        name: "Venkatesan K",
         role: "Prompt Engineer",
         content: "Learned advanced concepts in a very simplified way. The focus on logic building rather than just syntax is what I loved the most.",
         rating: 5,
         color: "#10b981"
     },
     {
-        name: "Pragadeeshwaran",
+        name: "Pragadeeshwaran S",
         role: "Java Developer",
         content: "Built portfolio-worthy projects during the course. The certification holds weight in interviews. The instructors are genuinely helpful.",
         rating: 5,
         color: "#3b82f6"
     },
     {
-        name: "Arivazhagan",
+        name: "Arivazhagan S",
         role: "Cloud Architect Specialist",
         content: "A goldmine for anyone looking to transition into tech. The curriculum is always updated with the latest trends. 10/10 platform!",
         rating: 5,
@@ -191,3 +191,4 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
 };
 
 export default Community;
+
