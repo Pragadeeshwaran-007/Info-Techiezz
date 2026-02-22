@@ -103,13 +103,15 @@ const Footer = () => {
             {/* Brand */}
             <div className="lg:col-span-2">
               <div
-                className="flex items-center gap-2.5 mb-5 cursor-pointer"
+                className="flex items-center gap-2.5 mb-5 cursor-pointer group"
                 onClick={() => handleLink('#home')}
               >
-                <img src={logo} alt="InfoTechiezz" className="h-12 w-12 object-contain mix-blend-multiply" />
+                <div className="bg-white p-1.5 rounded-xl shadow-sm transition-transform group-hover:scale-105">
+                  <img src={logo} alt="InfoTechiezz" className="h-10 w-10 object-contain mix-blend-multiply" />
+                </div>
                 <div>
-                  <span className="font-display text-lg font-black bg-clip-text text-transparent bg-gradient-to-r from-[#002B5B] to-[#00E5FF] block">InfoTechiezz</span>
-                  <span className="text-xs text-gray-500">Skills That Shape Your Future</span>
+                  <span className="font-display text-lg font-black text-white block">InfoTechiezz</span>
+                  <span className="text-xs text-gray-400">Skills That Shape Your Future</span>
                 </div>
               </div>
               <p className="text-sm text-gray-400 mb-5 max-w-xs leading-relaxed">
