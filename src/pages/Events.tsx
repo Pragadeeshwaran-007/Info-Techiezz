@@ -16,9 +16,9 @@ const contests: any[] = [
         id: 'codeclash',
         title: 'CodeClash: The DSA Battle',
         description: 'Prove your logic in a dual-phase assessment evaluating foundational and advanced Data Structures. Outperform the rest to win surprise gifts!',
-        date: 'Limited Slots',
+        deadline: '06/03/2026',
         time: '60-90 Mins Rounds',
-        deadline: 'Register Soon',
+        Rounds: '2',
         participants: 'Individual Only',
         prize: 'Gifts + Certificates',
         link: 'https://unstop.com/p/codeclash-infotechiezz-1646268',
@@ -75,7 +75,7 @@ const EventCard = ({ event, index }: { event: typeof contests[0]; index: number 
                         {event.badge}
                     </span>
                     <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-green-50 text-green-600 border border-green-100">
-                        🟢 UPCOMING
+                        🟢 ON GOING
                     </span>
                 </div>
             </div>
