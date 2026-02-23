@@ -14,7 +14,7 @@ import Footer from '@/components/Footer';
 const contests: any[] = [
     {
         id: 'codeclash',
-        title: 'CodeClash: The DSA Battle',
+        title: 'CodeClash: The Ultimate Coding Battle',
         description: 'Prove your logic in a dual-phase assessment evaluating foundational and advanced Data Structures. Outperform the rest to win surprise gifts!',
         deadline: '06/03/2026',
         time: '60-90 Mins Rounds',
