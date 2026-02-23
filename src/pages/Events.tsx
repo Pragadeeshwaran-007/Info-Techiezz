@@ -87,7 +87,7 @@ const EventCard = ({ event, index }: { event: typeof contests[0]; index: number 
             {/* Meta grid */}
             <div className="grid grid-cols-2 gap-4 mb-6">
                 {[
-                    { icon: Calendar, label: 'Date', value: event.date, color: '#2563EB' },
+                    { icon: Calendar, label: 'Rounds', value: event.Rounds, color: '#2563EB' },
                     { icon: Clock, label: 'Time', value: event.time, color: '#0d9488' },
                     { icon: Timer, label: 'Deadline', value: event.deadline, color: '#7c3aed' },
                     { icon: Users, label: 'Participants', value: event.participants, color: '#2563EB' },
