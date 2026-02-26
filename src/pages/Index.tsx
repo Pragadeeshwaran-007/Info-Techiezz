@@ -5,6 +5,8 @@ import Features from '@/components/Features';
 import Community from '@/components/Community';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import EventPopupModal from '@/components/EventPopupModal';
+import EventHighlight from '@/components/EventHighlight';
 
 const Index = () => {
   return (
@@ -12,12 +14,14 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
+        <EventHighlight />
         <Courses />
         <Features />
         <Community />
         <Contact />
       </main>
       <Footer />
+      <EventPopupModal />
     </div>
   );
 };
