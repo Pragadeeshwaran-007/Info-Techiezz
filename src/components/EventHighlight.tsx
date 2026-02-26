@@ -83,7 +83,7 @@ const EventHighlight = () => {
 
                         {/* Deadline */}
                         <div className="text-xs text-red-400/80 font-medium">
-                            Registration closes: 06 Mar 2026
+                            Registration closes: 07 Mar 2026
                         </div>
 
                         {/* Buttons */}
@@ -112,3 +112,4 @@ const EventHighlight = () => {
 };
 
 export default EventHighlight;
+
