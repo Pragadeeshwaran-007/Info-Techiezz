@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+    import parser
+  File "C:\Users\Arun E\Downloads\Infotechiezzupdate\Info-Techiezz-main\parser.py", line 1301, in <module>
+    parsed['iconName'] = icons[i]
+                         ~~~~~^^^
+IndexError: list index out of range
