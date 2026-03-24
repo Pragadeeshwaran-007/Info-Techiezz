@@ -642,7 +642,7 @@ const Events = () => {
                                 {[
                                     { label: 'WhatsApp', icon: Zap, link: 'https://chat.whatsapp.com/IIyTBEha0b10lQTlrm8iOg', color: '#22c55e' },
                                     { label: 'Instagram', icon: Star, link: 'https://www.instagram.com/infotechiezz/', color: '#ec4899' },
-                                    { label: 'LinkedIn', icon: Users, link: 'https://www.linkedin.com/in/infotechiezz/', color: '#0077b5' },
+                                    { label: 'LinkedIn', icon: Users, link: 'https://www.linkedin.com/company/info-techiezz/posts/?feedView=all', color: '#0077b5' },
                                     { label: 'YouTube', icon: Video, link: 'https://www.youtube.com/@infotechiezz', color: '#ef4444' }
                                 ].map((social) => (
                                     <a 

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Mail, Heart, ArrowRight, Youtube, Linkedin, Instagram, MessageCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-const logo = "/Info techiezz logo.png";
+import logo from "@/assets/logo.png";
 
 const footerLinks = {
   courses: [
@@ -19,6 +19,7 @@ const footerLinks = {
   ],
   company: [
     { name: 'About Us', href: '#about' },
+    { name: 'Services', href: '/services' },
     { name: 'Contact Us', href: '#contact' },
     { name: 'Careers', href: '#' },
     { name: 'Blog', href: '#' },
@@ -27,7 +28,7 @@ const footerLinks = {
 
 const socialLinks = [
   { name: 'YouTube', href: 'https://www.youtube.com/@infotechiezz', icon: Youtube },
-  { name: 'LinkedIn', href: 'http://www.linkedin.com/in/Infotechiezz', icon: Linkedin },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/company/info-techiezz/posts/?feedView=all', icon: Linkedin },
   { name: 'Instagram', href: 'https://www.instagram.com/infotechiezz/', icon: Instagram },
   { name: 'WhatsApp', href: 'https://whatsapp.com/channel/0029Vb7QJZG8fewpER7N8U0V', icon: MessageCircle },
 ];
@@ -107,7 +108,7 @@ const Footer = () => {
                 onClick={() => handleLink('#home')}
               >
                 <div className="bg-white p-1.5 rounded-xl shadow-sm transition-transform group-hover:scale-105">
-                  <img src={logo} alt="InfoTechiezz" className="h-10 w-10 object-contain mix-blend-multiply" />
+                  <img src={logo} alt="InfoTechiezz" className="h-10 w-10 object-contain" />
                 </div>
                 <div>
                   <span className="font-display text-lg font-black text-white block">InfoTechiezz</span>

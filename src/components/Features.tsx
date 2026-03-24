@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  GraduationCap, Laptop, Award, Users, Video, Code2,
-  ArrowRight, ChevronRight, Zap,
+  GraduationCap, Laptop, Award, Users, Video, Code2, ArrowRight, ChevronRight, Zap, UserCheck
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
@@ -44,6 +43,17 @@ const features = [
     highlights: ['Verifiable Certificates', 'LinkedIn Compatible', 'Assessment-backed'],
     stat: '3,000+ Certs Issued',
     emoji: '🏆',
+  },
+  {
+    icon: UserCheck,
+    title: '1-to-1 Mentorship',
+    subtitle: 'Personalized Guidance',
+    description: 'Get exclusive access to top industry mentors who provide personalized guidance, career roadmaps, and mock interview sessions tailored to your goals.',
+    color: '#0ea5e9',
+    grad: 'linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%)',
+    highlights: ['Career Roadmaps', 'Mock Interviews', '24/7 Doubt Clearing'],
+    stat: 'Available Now',
+    emoji: '🤝',
   },
   {
     icon: Users,

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Youtube, Linkedin, Instagram, ArrowRight, MessageCircle } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-const logo = "/Info techiezz logo.png";
+import logo from "@/assets/logo.png";
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -11,12 +11,13 @@ const navLinks = [
     { name: 'Courses', href: '#courses' },
     { name: 'Features', href: '#about' },
     { name: 'Events', href: '/events' },
+    { name: 'Services', href: '/services' },
     { name: 'Contact', href: '#contact' },
 ];
 
 const socialLinks = [
     { name: 'YouTube', href: 'https://www.youtube.com/@infotechiezz', icon: Youtube, color: 'text-red-500' },
-    { name: 'LinkedIn', href: 'http://www.linkedin.com/in/Infotechiezz', icon: Linkedin, color: 'text-blue-600' },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/company/info-techiezz/posts/?feedView=all', icon: Linkedin, color: 'text-blue-600' },
     { name: 'Instagram', href: 'https://www.instagram.com/infotechiezz/', icon: Instagram, color: 'text-pink-600' },
     { name: 'WhatsApp', href: 'https://whatsapp.com/channel/0029Vb7QJZG8fewpER7N8U0V', icon: MessageCircle, color: 'text-green-600' },
 ];
@@ -43,15 +44,31 @@ const Navbar = () => {
         if (href.startsWith('/')) {
             navigate(href);
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (location.pathname !== '/') {
+            return;
+        }
+
+        // Check if element exists on current page
+        const el = document.querySelector(href);
+        if (el) {
+            const offset = 80;
+            const elementPosition = el.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            return;
+        }
+
+        // If not found and not on home page, navigate to home and then scroll
+        if (location.pathname !== '/') {
             navigate('/');
             setTimeout(() => {
-                const el = document.querySelector(href);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                const targetEl = document.querySelector(href);
+                if (targetEl) {
+                    const offset = 80;
+                    const elementPosition = targetEl.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                }
             }, 100);
-        } else {
-            const el = document.querySelector(href);
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
@@ -61,7 +78,7 @@ const Navbar = () => {
             scrolled ? "md:pt-4" : "md:pt-6"
         )}>
             <div className={cn(
-                "max-w-5xl mx-auto rounded-3xl transition-all duration-300 border py-2 px-4 md:px-6 shadow-xl shadow-blue-500/5 bg-white/90 backdrop-blur-xl border-white/40",
+                "max-w-7xl mx-auto rounded-3xl transition-all duration-300 border py-2 px-4 md:px-8 shadow-xl shadow-blue-500/5 bg-white/90 backdrop-blur-xl border-white/40",
                 scrolled ? "border-gray-200/50" : "border-white/50"
             )}>
                 <div className="flex items-center justify-between">
@@ -70,15 +87,15 @@ const Navbar = () => {
                         className="flex items-center gap-2.5 cursor-pointer group"
                         onClick={() => handleNavClick('#home')}
                     >
-                        <div className="relative">
+                        <div className="relative flex-shrink-0">
                             <img
                                 src={logo}
                                 alt="InfoTechiezz"
-                                className="h-8 w-8 md:h-10 md:w-10 object-contain transition-all duration-300 mix-blend-multiply"
+                                className="h-8 w-8 md:h-10 md:w-10 object-contain transition-all duration-300 flex-shrink-0"
                             />
                             <div className="absolute -inset-1 bg-blue-500/10 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
-                        <div className="block">
+                        <div className="block flex-shrink-0">
                             <span className="font-display text-base md:text-lg font-black block leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#002B5B] to-[#00E5FF]">
                                 InfoTechiezz
                             </span>
@@ -86,13 +103,13 @@ const Navbar = () => {
                     </div>
 
                     {/* Desktop Nav */}
-                    <div className="hidden md:flex items-center gap-1">
+                    <div className="hidden md:flex items-center gap-0.5 lg:gap-1">
                         {navLinks.map((link) => (
                             <button
                                 key={link.name}
                                 onClick={() => handleNavClick(link.href)}
                                 className={cn(
-                                    "px-4 py-2 rounded-xl text-sm font-semibold transition-all",
+                                    "px-3 py-1.5 rounded-xl text-[13px] font-bold transition-all whitespace-nowrap",
                                     location.pathname === '/' && location.hash === link.href.replace('/', '')
                                         ? "text-blue-600 bg-blue-50"
                                         : "text-gray-500 hover:bg-blue-50 hover:text-blue-600"
@@ -104,7 +121,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Desktop Actions */}
-                    <div className="hidden md:flex items-center gap-3 border-l border-gray-100 ml-2 pl-5">
+                    <div className="hidden lg:flex items-center gap-2 border-l border-gray-100 ml-1 pl-4">
                         <div className="flex items-center gap-1.5 mr-2">
                             {socialLinks.map((s) => (
                                 <motion.a
