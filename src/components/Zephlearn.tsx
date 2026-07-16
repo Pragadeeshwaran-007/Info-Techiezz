@@ -76,7 +76,7 @@ const Zephlearn = () => (
                 className="text-center"
             >
                 <a
-                    href="https://zephlearnfrontend.pragadeeshwaran098.workers.dev/"
+                    href="https://zephlearn.infotechiezz.workers.dev/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-violet-600 to-indigo-600 shadow-lg shadow-violet-200 hover:brightness-110 transition-all"
