@@ -9,7 +9,7 @@ const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'Roadmaps', href: '/roadmaps' },
     { name: 'Courses', href: '#courses' },
-    { name: 'Practice', href: 'https://zephlearnfrontend.pragadeeshwaran098.workers.dev/', external: true },
+    { name: 'Practice', href: 'https://zephlearn.infotechiezz.workers.dev/', external: true },
     { name: 'Features', href: '#about' },
     { name: 'Events', href: '/events' },
     { name: 'Services', href: '/services' },
