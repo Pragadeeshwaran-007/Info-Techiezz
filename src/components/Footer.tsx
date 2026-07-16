@@ -160,7 +160,7 @@ const Footer = () => {
           </div>
 
           <div className="pt-6 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-3">
-            <p className="text-xs text-gray-600">© 2025 InfoTechiezz. All rights reserved.</p>
+            <p className="text-xs text-gray-600">© 2026 InfoTechiezz. All rights reserved.</p>
             <p className="text-xs text-gray-600 flex items-center gap-1.5">
               Made with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> by the InfoTechiezz Team
             </p>
